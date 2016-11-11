@@ -16,7 +16,7 @@ public class AdjustFOVByDiveAmount : MonoBehaviour {
         // TODO lerp
         Camera c = GetComponent<Camera>();
         float targetFOV = Mathf.Lerp(glideFOV, diveFOV, v);
-        c.fieldOfView = Mathf.Lerp(c.fieldOfView, targetFOV, 10*Time.deltaTime);
+        c.fieldOfView = Mathf.Lerp(c.fieldOfView, targetFOV, 3*Time.deltaTime);
     }
     
 }

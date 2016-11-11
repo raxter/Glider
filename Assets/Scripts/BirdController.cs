@@ -68,6 +68,9 @@ public class BirdController : MonoBehaviour {
         Rotate();
         Move();
         MoveCamera();
+
+        if (Input.GetMouseButtonDown(0))
+            Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Rotate() {

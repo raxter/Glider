@@ -9,7 +9,12 @@ public class AdustPositionByDiveAmount : MonoBehaviour {
 
     void Start()
     {
-        
+
+        GamePlayController.OnDiveAmountChanged += GamePlayController_OnDiveAmountChanged;
     }
 
+    private void GamePlayController_OnDiveAmountChanged(float v)
+    {
+        transform.localPosition = Vector3.Lerp(glidePosition, dropPosition, v);
+    }
 }
