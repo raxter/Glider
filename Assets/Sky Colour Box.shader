@@ -86,6 +86,8 @@
 
 		lerpFactor -= frac(_Depth/2 - 1)*8 - 4;
 
+		lerpFactor = round(lerpFactor * 5) / 5;
+
 		return lerp(colourTop, colourBottom, saturate(lerpFactor));
 	}
 		ENDCG
