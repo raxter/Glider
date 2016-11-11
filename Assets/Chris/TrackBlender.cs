@@ -40,6 +40,7 @@ public class TrackBlender : MonoBehaviour
         }
         while (nextVolume < 0f);
 
+        currentSource.time %= nextSource.clip.length;
         currentSource.clip = nextSource.clip;
         currentSource.Play();
 

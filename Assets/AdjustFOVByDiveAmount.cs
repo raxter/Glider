@@ -11,7 +11,7 @@ public class AdjustFOVByDiveAmount : MonoBehaviour {
         GamePlayController.OnDiveAmountChanged += GamePlayController_OnDiveAmountChanged;
 	}
 
-    private void GamePlayController_OnDiveAmountChanged(float v)
+    private void GamePlayController_OnDiveAmountChanged(float v, float d)
     {
         // TODO lerp
         Camera c = GetComponent<Camera>();

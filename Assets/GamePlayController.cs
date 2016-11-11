@@ -25,8 +25,8 @@ public class GamePlayController : MonoBehaviour
     public BirdController birdController;
 
 
-
-    public static event System.Action<float> OnDiveAmountChanged;
+    float oldDiveAmount = 0;
+    public static event System.Action<float, float> OnDiveAmountChanged;
     // Update is called once per frame
     void Update ()
     {
@@ -49,7 +49,8 @@ public class GamePlayController : MonoBehaviour
                 birdController.pitch = pitchAmount;
             }
             if (OnDiveAmountChanged != null)
-                OnDiveAmountChanged(diveAmount);
+                OnDiveAmountChanged(diveAmount, (oldDiveAmount - diveAmount) / Time.deltaTime);
+            
         }
 
         UpdateDiveAmount();
@@ -62,6 +63,8 @@ public class GamePlayController : MonoBehaviour
         }
         skyboxController.Depth = -birdController.transform.position.y;
 
+
+        oldDiveAmount = diveAmount;
     }
 
     void UpdateDiveAmount()

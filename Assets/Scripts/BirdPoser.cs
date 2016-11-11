@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class BirdPoser : MonoBehaviour
 {
     [System.Serializable]
@@ -46,7 +47,7 @@ public class BirdPoser : MonoBehaviour
     public float flapFrequency = 5;
     public float flapRange = 50;
 
-
+    float flapTimer;
 
     void LateUpdate()
     {
@@ -55,8 +56,10 @@ public class BirdPoser : MonoBehaviour
 
         if (flap > 0)
         {
-            flapTwist = Mathf.Cos(Time.time * flapFrequency) * flapRange;
-            flapBend = Mathf.Sin(Time.time * flapFrequency) * flapRange;
+            flapTimer += Time.deltaTime * flapFrequency;
+
+            flapTwist = Mathf.Cos(flapTimer) * flapRange;
+            flapBend = Mathf.Sin(flapTimer) * flapRange;
         }
 
         float twist = Mathf.Lerp(wingTwist, flapTwist, flap);

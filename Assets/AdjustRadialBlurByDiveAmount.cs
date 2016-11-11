@@ -13,7 +13,7 @@ public class AdjustRadialBlurByDiveAmount : MonoBehaviour {
         GamePlayController.OnDiveAmountChanged += GamePlayController_OnDiveAmountChanged;
     }
 
-    private void GamePlayController_OnDiveAmountChanged(float v) {
+    private void GamePlayController_OnDiveAmountChanged(float v, float d) {
         rb.blurAmount = Mathf.Lerp(glideBlur, dropBlur, v);
     }
 }

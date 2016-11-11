@@ -13,6 +13,7 @@ public class BirdController : MonoBehaviour {
     public float GravityModifier = 0.5f;
     public float fallMultiplier = 2;
     public bool invertAxis;
+    public bool ignorePitchUpInput = true;
     public bool isFallingBack;
 
     float diveModifier;
@@ -73,9 +74,29 @@ public class BirdController : MonoBehaviour {
             Cursor.lockState = CursorLockMode.Locked;
     }
 
-    void Rotate() {
-        float value = mouseVSpeed * Input.GetAxis("Mouse Y");
 
+    float noUpTimeValue = 0;
+    void Rotate() {
+        float value = mouseVSpeed * Input.GetAxis("Mouse Y")/60;// * Time.deltaTime;
+        if (ignorePitchUpInput)
+        {
+            if (value <= 0)
+            {
+                noUpTimeValue -= value;
+                value = 0;
+            }
+            else
+            {
+                noUpTimeValue -= value;
+                if (noUpTimeValue < 0)
+                    noUpTimeValue = 0;
+            }
+
+            noUpTimeValue = Mathf.Lerp(noUpTimeValue, 0, Time.deltaTime * 1);
+
+            if (noUpTimeValue > 0.01f)
+                value = 0;
+        }
         PreventFlyingUp(ref value);
 
         pitch = invertAxis ? pitch - value : pitch + value;

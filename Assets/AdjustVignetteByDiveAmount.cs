@@ -13,7 +13,7 @@ public class AdjustVignetteByDiveAmount : MonoBehaviour {
         GamePlayController.OnDiveAmountChanged += GamePlayController_OnDiveAmountChanged;
     }
 
-    private void GamePlayController_OnDiveAmountChanged(float v) {
+    private void GamePlayController_OnDiveAmountChanged(float v, float d) {
         edge.fallOff = Mathf.Lerp(glideFallOff, dropFallOff, v);
     }
 }
