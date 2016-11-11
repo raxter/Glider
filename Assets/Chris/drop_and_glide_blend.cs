@@ -41,10 +41,12 @@ public class drop_and_glide_blend : MonoBehaviour
 
         float currentSpeed = trackBlender.GetComponent<TrackBlender>().currentFlightSpeed;
         float speedDelta = oldFlightSpeed - currentSpeed;
-        if (speedDelta > 1.7f && currentSpeed < 10f)
+        if (speedDelta > 0.5f && currentSpeed < 10f)
         {
             if (!suddenSwoosh.GetComponent<AudioSource>().isPlaying)
             {
+                suddenSwoosh.GetComponent<AudioSource>().pitch = Random.Range(1f, 1.15f);
+                suddenSwoosh.GetComponent<AudioSource>().volume = Mathf.Lerp(0.2f,1, Mathf.Clamp01((speedDelta - 0.5f)/2));
                 suddenSwoosh.GetComponent<AudioSource>().Play();
             }
 
