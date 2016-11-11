@@ -6,9 +6,13 @@ public class drop_and_glide_blend : MonoBehaviour
 {
     public AudioMixer audiomixer;
 
+    private Transform suddenSwoosh;
+
     public AnimationCurve swooshSoundVolume;
 
     public Transform trackBlender;
+
+    private float oldFlightSpeed = 0;
 
     public float GlideToDropBlend
     {
@@ -21,6 +25,7 @@ public class drop_and_glide_blend : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        suddenSwoosh = transform.FindChild("SuddenSwoosh");
         adjustGlideAndDropBlend(0f);
     }
 
@@ -34,6 +39,16 @@ public class drop_and_glide_blend : MonoBehaviour
 
         trackBlender.GetComponent<TrackBlender>().currentFlightSpeed = newValue * 30f;
 
+        if (oldFlightSpeed - trackBlender.GetComponent<TrackBlender>().currentFlightSpeed > 3f && trackBlender.GetComponent<TrackBlender>().currentFlightSpeed < 10f)
+        {
+            if (!suddenSwoosh.GetComponent<AudioSource>().isPlaying)
+            {
+                suddenSwoosh.GetComponent<AudioSource>().Play();
+            }
+
+        }
+
+        oldFlightSpeed = trackBlender.GetComponent<TrackBlender>().currentFlightSpeed;
     }
 
 
