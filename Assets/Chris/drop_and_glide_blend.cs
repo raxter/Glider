@@ -39,7 +39,9 @@ public class drop_and_glide_blend : MonoBehaviour
 
         trackBlender.GetComponent<TrackBlender>().currentFlightSpeed = newValue * 30f;
 
-        if (oldFlightSpeed - trackBlender.GetComponent<TrackBlender>().currentFlightSpeed > 3f && trackBlender.GetComponent<TrackBlender>().currentFlightSpeed < 10f)
+        float currentSpeed = trackBlender.GetComponent<TrackBlender>().currentFlightSpeed;
+        float speedDelta = oldFlightSpeed - currentSpeed;
+        if (speedDelta > 1.7f && currentSpeed < 10f)
         {
             if (!suddenSwoosh.GetComponent<AudioSource>().isPlaying)
             {
@@ -48,7 +50,7 @@ public class drop_and_glide_blend : MonoBehaviour
 
         }
 
-        oldFlightSpeed = trackBlender.GetComponent<TrackBlender>().currentFlightSpeed;
+        oldFlightSpeed = currentSpeed;
     }
 
 
