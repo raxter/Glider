@@ -5,6 +5,9 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class GamePlayController : MonoBehaviour
 {
+    [Header("DEBUG STUFF")]
+    public bool overrideDiveValue = false;
+ [Header("NORMAL STUFF")]
     [Range(-1, 1)]
     public float diveAmount = 0;
     public float pitchAmount = 0;
@@ -17,16 +20,36 @@ public class GamePlayController : MonoBehaviour
 
     public SkyboxController skyboxController;
 
+    public drop_and_glide_blend dropAndGlideBlender;
+
     public BirdController birdController;
 
+
+
+    public static event System.Action<float> OnDiveAmountChanged;
     // Update is called once per frame
     void Update ()
     {
         if (Application.isPlaying)
         {
-            pitchAmount = birdController.pitch;
-            diveAmount = birdController.pitch;
-            diveAmount /= diveAmount >= 0 ? birdController.vLimitLow : -birdController.vLimitHigh;
+            if (!overrideDiveValue)
+            {
+                pitchAmount = birdController.pitch;
+                diveAmount = birdController.pitch;
+                diveAmount /= diveAmount >= 0 ? birdController.vLimitLow : -birdController.vLimitHigh;
+            }
+            else
+            {
+                // update pitch for sanity
+                if (diveAmount >= 0)
+                    pitchAmount = Mathf.Lerp(0, birdController.vLimitLow, diveAmount);
+                else
+                    pitchAmount = Mathf.Lerp(0, birdController.vLimitHigh, - diveAmount);
+
+                birdController.pitch = pitchAmount;
+            }
+            if (OnDiveAmountChanged != null)
+                OnDiveAmountChanged(diveAmount);
         }
 
         UpdateDiveAmount();
@@ -34,6 +57,8 @@ public class GamePlayController : MonoBehaviour
         if (Application.isPlaying)
         {
             birdController.transform.localPosition += Vector3.up * birdController.ySpeed * Time.deltaTime;
+
+            dropAndGlideBlender.GlideToDropBlend = diveAmount;
         }
         skyboxController.Depth = -birdController.transform.position.y;
 

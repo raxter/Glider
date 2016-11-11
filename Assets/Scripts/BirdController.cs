@@ -52,7 +52,7 @@ public class BirdController : MonoBehaviour {
     }
 
     float gravity;
-    public float pitch { get; private set; }
+    public float pitch { get; set; }
 
     #endregion
 
@@ -80,11 +80,11 @@ public class BirdController : MonoBehaviour {
         ApplyGravity();
 
         pitch = Mathf.Clamp(pitch, vLimitHigh, vLimitLow);
-        transform.localEulerAngles = Vector3.right * pitch;
+        //transform.localEulerAngles = Vector3.right * pitch;
     }
 
     void Move() {
-        Debug.Log(clampedYSpeed);
+        //Debug.Log(clampedYSpeed);
         //transform.Translate(Vector3.up * clampedYSpeed * Time.deltaTime, Space.World);
     }
 

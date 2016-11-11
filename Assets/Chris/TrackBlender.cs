@@ -40,7 +40,9 @@ public class TrackBlender : MonoBehaviour
     void Update()
     {
         currentTrackProgress += currentFlightSpeed * Time.deltaTime;
-        currentTrackProgressTextObject.text = "" + currentTrackProgress;
+
+        if (currentTrackProgressTextObject != null)
+            currentTrackProgressTextObject.text = "" + currentTrackProgress;
 
         if (currentTrackProgress > 100f)
         {
