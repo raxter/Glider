@@ -5,7 +5,6 @@ using UnityEngine.Audio;
 public class drop_and_glide_blend : MonoBehaviour
 {
     public AudioMixer audiomixer;
-    public Transform bird;
 
     public AnimationCurve swooshSoundVolume;
 
@@ -30,7 +29,7 @@ public class drop_and_glide_blend : MonoBehaviour
         newValue = Mathf.Clamp01(newValue);
 
         audiomixer.SetFloat("swooshEQGain", newValue);
-        audiomixer.SetFloat("musicEQGain", 1f - newValue);
+        audiomixer.SetFloat("musicVolume", -5f + (1f - newValue) * 5f);
         audiomixer.SetFloat("swooshVolume", -10f + swooshSoundVolume.Evaluate(newValue) * 10f);
 
         trackBlender.GetComponent<TrackBlender>().currentFlightSpeed = newValue * 30f;
