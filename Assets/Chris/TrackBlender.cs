@@ -17,11 +17,32 @@ public class TrackBlender : MonoBehaviour
 
     public AudioClip[] trackList;
 
-    void nextTrack()
+    IEnumerator trackBlending()
     {
+        float currentVolume;
+        float nextVolume;
+
+        do
+        {
+            audiomixer.GetFloat("currentTrackVolume", out currentVolume);
+            audiomixer.SetFloat("currentTrackVolume", currentVolume - currentFlightSpeed / 10f);
+
+            audiomixer.GetFloat("nextTrackVolume", out nextVolume);
+            audiomixer.SetFloat("nextTrackVolume", nextVolume + currentFlightSpeed / 10f);
+
+            yield return new WaitForSeconds(0.1f);
+        }
+        while (nextVolume < 0f);
+
+        audiomixer.SetFloat("nextTrackVolume", 0f);
 
     }
 
+    void nextTrack()
+    {
+        StartCoroutine(trackBlending());
+
+    }
 
     // Use this for initialization
     void Start()
@@ -32,7 +53,7 @@ public class TrackBlender : MonoBehaviour
         nextSource.Play();
 
         audiomixer.SetFloat("currentTrackVolume", 0f);
-        audiomixer.SetFloat("nextTrackVolume", -80f);
+        audiomixer.SetFloat("nextTrackVolume", -40f);
 
     }
 

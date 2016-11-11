@@ -29,9 +29,6 @@ public class drop_and_glide_blend : MonoBehaviour
     {
         newValue = Mathf.Clamp01(newValue);
 
-        if (bird != null)
-            bird.rotation = Quaternion.Euler(0f, 0f, newValue * 90f);
-
         audiomixer.SetFloat("swooshEQGain", newValue);
         audiomixer.SetFloat("musicEQGain", 1f - newValue);
         audiomixer.SetFloat("swooshVolume", -10f + swooshSoundVolume.Evaluate(newValue) * 10f);
