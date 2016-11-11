@@ -1,0 +1,274 @@
+fileFormatVersion: 2
+guid: 327357de180ae644d86d23c7b0dbe7fd
+timeCreated: 1478874353
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Abdomen
+    100002: Arm.L
+    100004: Arm.R
+    100006: Chest
+    100008: Forearm.L
+    100010: Forearm.R
+    100012: //RootNode
+    100014: Glidey
+    100016: GlideyRig
+    100018: Head
+    100020: Head_end
+    100022: Neck
+    100024: Shoulder.L
+    100026: Shoulder.R
+    100028: Tail
+    100030: Tailtip.L
+    100032: Tailtip.L_end
+    100034: Tailtip.R
+    100036: Tailtip.R_end
+    100038: Wingtip.L
+    100040: Wingtip.L_end
+    100042: Wingtip.R
+    100044: Wingtip.R_end
+    400000: Abdomen
+    400002: Arm.L
+    400004: Arm.R
+    400006: Chest
+    400008: Forearm.L
+    400010: Forearm.R
+    400012: //RootNode
+    400014: Glidey
+    400016: GlideyRig
+    400018: Head
+    400020: Head_end
+    400022: Neck
+    400024: Shoulder.L
+    400026: Shoulder.R
+    400028: Tail
+    400030: Tailtip.L
+    400032: Tailtip.L_end
+    400034: Tailtip.R
+    400036: Tailtip.R_end
+    400038: Wingtip.L
+    400040: Wingtip.L_end
+    400042: Wingtip.R
+    400044: Wingtip.R_end
+    4300000: Glidey
+    7400000: GlideyRig|Dive.001
+    7400002: GlideyRig|Dive.002
+    7400004: GlideyRig|Glide
+    7400006: GlideyRig|Glide.001
+    7400008: GlideyRig|Dive
+    7400010: GlideyRig|Glide.002
+    9500000: //RootNode
+    13700000: Glidey
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: GlideyRig|Glide
+      takeName: GlideyRig|Glide
+      firstFrame: 0
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Glidey
+        weight: 1
+      - path: GlideyRig
+        weight: 1
+      - path: GlideyRig/Chest
+        weight: 1
+      - path: GlideyRig/Chest/Abdomen
+        weight: 1
+      - path: GlideyRig/Chest/Abdomen/Tail
+        weight: 1
+      - path: GlideyRig/Chest/Abdomen/Tail/Tailtip.L
+        weight: 1
+      - path: GlideyRig/Chest/Abdomen/Tail/Tailtip.L/Tailtip.L_end
+        weight: 1
+      - path: GlideyRig/Chest/Abdomen/Tail/Tailtip.R
+        weight: 1
+      - path: GlideyRig/Chest/Abdomen/Tail/Tailtip.R/Tailtip.R_end
+        weight: 1
+      - path: GlideyRig/Chest/Neck
+        weight: 1
+      - path: GlideyRig/Chest/Neck/Head
+        weight: 1
+      - path: GlideyRig/Chest/Neck/Head/Head_end
+        weight: 1
+      - path: GlideyRig/Chest/Shoulder.L
+        weight: 1
+      - path: GlideyRig/Chest/Shoulder.L/Arm.L
+        weight: 1
+      - path: GlideyRig/Chest/Shoulder.L/Arm.L/Forearm.L
+        weight: 1
+      - path: GlideyRig/Chest/Shoulder.L/Arm.L/Forearm.L/Wingtip.L
+        weight: 1
+      - path: GlideyRig/Chest/Shoulder.L/Arm.L/Forearm.L/Wingtip.L/Wingtip.L_end
+        weight: 1
+      - path: GlideyRig/Chest/Shoulder.R
+        weight: 1
+      - path: GlideyRig/Chest/Shoulder.R/Arm.R
+        weight: 1
+      - path: GlideyRig/Chest/Shoulder.R/Arm.R/Forearm.R
+        weight: 1
+      - path: GlideyRig/Chest/Shoulder.R/Arm.R/Forearm.R/Wingtip.R
+        weight: 1
+      - path: GlideyRig/Chest/Shoulder.R/Arm.R/Forearm.R/Wingtip.R/Wingtip.R_end
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: GlideyRig|Dive
+      takeName: GlideyRig|Dive
+      firstFrame: 0
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Glidey
+        weight: 1
+      - path: GlideyRig
+        weight: 1
+      - path: GlideyRig/Chest
+        weight: 1
+      - path: GlideyRig/Chest/Abdomen
+        weight: 1
+      - path: GlideyRig/Chest/Abdomen/Tail
+        weight: 1
+      - path: GlideyRig/Chest/Abdomen/Tail/Tailtip.L
+        weight: 1
+      - path: GlideyRig/Chest/Abdomen/Tail/Tailtip.L/Tailtip.L_end
+        weight: 1
+      - path: GlideyRig/Chest/Abdomen/Tail/Tailtip.R
+        weight: 1
+      - path: GlideyRig/Chest/Abdomen/Tail/Tailtip.R/Tailtip.R_end
+        weight: 1
+      - path: GlideyRig/Chest/Neck
+        weight: 1
+      - path: GlideyRig/Chest/Neck/Head
+        weight: 1
+      - path: GlideyRig/Chest/Neck/Head/Head_end
+        weight: 1
+      - path: GlideyRig/Chest/Shoulder.L
+        weight: 1
+      - path: GlideyRig/Chest/Shoulder.L/Arm.L
+        weight: 1
+      - path: GlideyRig/Chest/Shoulder.L/Arm.L/Forearm.L
+        weight: 1
+      - path: GlideyRig/Chest/Shoulder.L/Arm.L/Forearm.L/Wingtip.L
+        weight: 1
+      - path: GlideyRig/Chest/Shoulder.L/Arm.L/Forearm.L/Wingtip.L/Wingtip.L_end
+        weight: 1
+      - path: GlideyRig/Chest/Shoulder.R
+        weight: 1
+      - path: GlideyRig/Chest/Shoulder.R/Arm.R
+        weight: 1
+      - path: GlideyRig/Chest/Shoulder.R/Arm.R/Forearm.R
+        weight: 1
+      - path: GlideyRig/Chest/Shoulder.R/Arm.R/Forearm.R/Wingtip.R
+        weight: 1
+      - path: GlideyRig/Chest/Shoulder.R/Arm.R/Forearm.R/Wingtip.R/Wingtip.R_end
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: Glidey
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
