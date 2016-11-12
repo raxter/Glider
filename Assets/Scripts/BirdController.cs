@@ -3,28 +3,29 @@
 public class BirdController : MonoBehaviour {
 
     #region Properties
-
+    
     public float mouseVSpeed = 2;
     public float vLimitHigh = -40, vLimitLow = 80;
 
-    public float bottom = -3, top = 2;
+    public float top = 2;
 
     public float baseGravity = 5;
     public float GravityModifier = 0.5f;
-    public float fallMultiplier = 2;
+    public float upwardSpeedModifier = 0.1f;
+    public float maxClimbTime = 0.1f;
+    public float fallBackStrength = 0.1f;
+    public float tipWeight = 40;
+
     public bool invertAxis;
     public bool ignorePitchUpInput = true;
     public bool isFallingBack;
 
     float diveModifier;
-    public float fallBackStrength = 0.1f;
-
     float climbing;
-    public float maxClimbTime = 1;
-
+    
     float gravityModifier {
         get {
-            return isFallingBack ? Mathf.Abs(vLimitHigh) * diveModifier : Mathf.Abs(pitch) * GravityModifier;
+            return isFallingBack ? Mathf.Abs(vLimitHigh) * diveModifier : (Mathf.Abs(pitch) + tipWeight) * GravityModifier;
         }
     }
 
@@ -36,13 +37,7 @@ public class BirdController : MonoBehaviour {
 
     public float ySpeed {
         get {
-            return -pitch * 0.1f;
-        }
-    }
-
-    float clampedYSpeed {
-        get {
-            return posY < bottom ? Mathf.Max(0, ySpeed) : ySpeed;
+            return pitch > 0 ? -pitch * 0.1f : -pitch * 0.1f * upwardSpeedModifier;
         }
     }
 
@@ -90,8 +85,7 @@ public class BirdController : MonoBehaviour {
         gravity = baseGravity + gravityModifier;
         pitch += gravity * Time.deltaTime;
     }
-
-    float fallPitch, fallTime, fallDuration = 1;
+    
     void PreventFlyingUp(ref float value) {
         if (pitch < 0 && transform.position.y > highestPoint)
             climbing += Time.deltaTime;
@@ -103,12 +97,7 @@ public class BirdController : MonoBehaviour {
 
         if (climbing >= maxClimbTime) {
             if (!isFallingBack) {
-                fallPitch = pitch;
-                fallTime = 0;
-                fallDuration = Mathf.Abs(pitch) * 0.02f;
-
                 diveModifier = Mathf.Abs(pitch * fallBackStrength);
-                print(fallDuration);
                 isFallingBack = true;
             }
 

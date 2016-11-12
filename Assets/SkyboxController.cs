@@ -1,22 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SkyboxController : MonoBehaviour
 {
     public Material skyboxMaterial;
-
+    public float distanceBetweenColours = 2;
     public Color[] colours;
-
+    
     public float Depth
     {
         set
         {
-            skyboxMaterial.SetFloat("_Depth", value/15);
+            skyboxMaterial.SetFloat("_Depth", value/distanceBetweenColours);
         }
     }
 
-    [ContextMenu("Genreate Pallete")]
+    [ContextMenu("Generate Pallete")]
     void GeneratePallete()
     {
         Texture2D pallete = new Texture2D(colours.Length, 1);
@@ -34,9 +32,9 @@ public class SkyboxController : MonoBehaviour
         System.IO.File.WriteAllBytes(path, data);
         Debug.Log(path);
         DestroyImmediate(pallete);
-#if UNITY_EDITOR
-        UnityEditor.AssetDatabase.Refresh();
-#endif
+        #if UNITY_EDITOR
+                UnityEditor.AssetDatabase.Refresh();
+        #endif
     }
 	
 }
