@@ -8,6 +8,8 @@ public class drop_and_glide_blend : MonoBehaviour
 
     private Transform suddenSwoosh;
 
+    public float currentTrackCutOffFreq = 3000f;
+
     public AnimationCurve swooshSoundVolume;
 
     public Transform trackBlender;
@@ -25,6 +27,7 @@ public class drop_and_glide_blend : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        currentTrackCutOffFreq = GetComponent<TrackBlender>().trackDiveCutOffFreq[0];
         suddenSwoosh = transform.FindChild("SuddenSwoosh");
         adjustGlideAndDropBlend(0f);
     }
@@ -35,7 +38,7 @@ public class drop_and_glide_blend : MonoBehaviour
 
         audiomixer.SetFloat("swooshEQGain", newValue);
         audiomixer.SetFloat("musicVolume", -4f + (1f - newValue) * 4f);
-        audiomixer.SetFloat("musicCutoffFreq", 22000f - newValue * 19000f);
+        audiomixer.SetFloat("musicCutoffFreq", currentTrackCutOffFreq + 19000f - newValue * 19000f);
         audiomixer.SetFloat("swooshVolume", -11f + swooshSoundVolume.Evaluate(newValue) * 10f);
 
         trackBlender.GetComponent<TrackBlender>().currentFlightSpeed = newValue * 30f;

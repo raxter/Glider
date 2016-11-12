@@ -16,6 +16,7 @@ public class TrackBlender : MonoBehaviour
     float currentTrackProgress = 0f;
 
     public AudioClip[] trackList;
+    public float[] trackDiveCutOffFreq;
     public int nextPlayingTrackNum = 1;
 
     IEnumerator trackBlending()
@@ -43,6 +44,8 @@ public class TrackBlender : MonoBehaviour
         currentSource.time %= nextSource.clip.length;
         currentSource.clip = nextSource.clip;
         currentSource.Play();
+
+        GetComponent<drop_and_glide_blend>().currentTrackCutOffFreq = trackDiveCutOffFreq[nextPlayingTrackNum];
 
         currentSource.time = nextSource.time;
 
