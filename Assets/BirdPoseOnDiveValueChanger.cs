@@ -38,6 +38,10 @@ public class BirdPoseOnDiveValueChanger : MonoBehaviour {
 
         poser.wingBend = Mathf.Lerp(wingBendOnGlide, wingBendOnDive, v);
 
+        poser.flutterFrequency = Mathf.Lerp(flutterFreqOnGlide, flutterFreqOnDive, v);
+
+        poser.flutterScale = Mathf.Lerp(flutterScaleOnGlide, flutterScaleOnDive, v);
+
         if (d > 0)
             flapTime += d * Mathf.InverseLerp(0, 0.7f, v);
         flapTime = Mathf.Min(flapTime, 2);

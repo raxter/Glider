@@ -91,6 +91,8 @@
 				fixed4 color = fixed4(0,0,0,1);
 
 				float3 eye = _WorldSpaceCameraPos;
+				eye.y = 1;
+				eye.z = -10;
 				float3 front = _CameraForward * _FOV;
 				float3 up = _CameraUp;
 				float3 right = _CameraRight;
@@ -108,7 +110,7 @@
 					float3 position = eye + ray * stepTotal;
 					float angle = atan2(position.z, position.x);
 					float movement = sin(angle + _Time.y * 4.) * 0.02;
-					movement *= _InputRatio;
+					movement *=  _InputRatio;
 					float displacementDiv = _DivisionThinckness / smoothstep(0.0, _DivisionRange, movement + abs(position.y / 5.));
 					
 					position.xz /= 1.0 + displacementDiv * _InputRatio;
