@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(TrailRenderer))]
 public class WingTrail : MonoBehaviour {
 
     public float angle = 35;
