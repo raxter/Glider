@@ -34,8 +34,9 @@ public class drop_and_glide_blend : MonoBehaviour
         newValue = Mathf.Clamp01(newValue);
 
         audiomixer.SetFloat("swooshEQGain", newValue);
-        audiomixer.SetFloat("musicVolume", -5f + (1f - newValue) * 5f);
-        audiomixer.SetFloat("swooshVolume", -10f + swooshSoundVolume.Evaluate(newValue) * 10f);
+        audiomixer.SetFloat("musicVolume", -4f + (1f - newValue) * 4f);
+        audiomixer.SetFloat("musicCutoffFreq", 22000f - newValue * 19000f);
+        audiomixer.SetFloat("swooshVolume", -11f + swooshSoundVolume.Evaluate(newValue) * 10f);
 
         trackBlender.GetComponent<TrackBlender>().currentFlightSpeed = newValue * 30f;
 
@@ -46,7 +47,7 @@ public class drop_and_glide_blend : MonoBehaviour
             if (!suddenSwoosh.GetComponent<AudioSource>().isPlaying)
             {
                 suddenSwoosh.GetComponent<AudioSource>().pitch = Random.Range(1f, 1.15f);
-                suddenSwoosh.GetComponent<AudioSource>().volume = Mathf.Lerp(0.2f,1, Mathf.Clamp01((speedDelta - 0.5f)/2));
+                suddenSwoosh.GetComponent<AudioSource>().volume = Mathf.Lerp(0.2f, 1, Mathf.Clamp01((speedDelta - 0.5f) / 2));
                 suddenSwoosh.GetComponent<AudioSource>().Play();
             }
 
