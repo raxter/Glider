@@ -7,6 +7,8 @@ public class AdustPositionByDiveAmount : MonoBehaviour {
     public Vector3 glidePosition;
     public Vector3 dropPosition;
 
+    public float underLerpMultiplier = 0.5f;
+
     void Start()
     {
 
@@ -15,6 +17,8 @@ public class AdustPositionByDiveAmount : MonoBehaviour {
 
     private void GamePlayController_OnDiveAmountChanged(float v, float d)
     {
-        transform.localPosition = Vector3.Lerp(glidePosition, dropPosition, v);
+        if (v < 0)
+            v *= underLerpMultiplier;
+        transform.localPosition = Vector3.LerpUnclamped(glidePosition, dropPosition, v);
     }
 }
