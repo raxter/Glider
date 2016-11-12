@@ -29,12 +29,6 @@ public class BirdController : MonoBehaviour {
         }
     }
 
-    float posY {
-        get {
-            return 0;
-        }
-    }
-
     public float ySpeed {
         get {
             return pitch > 0 ? -pitch * 0.1f : -pitch * 0.1f * upwardSpeedModifier;
