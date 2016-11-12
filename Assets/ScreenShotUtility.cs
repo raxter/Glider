@@ -7,7 +7,7 @@ public class ScreenShotUtility : MonoBehaviour
     void Update()
     {
 
-        if (Input.anyKeyDown || Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
         {
             TakeScreen();
         }
