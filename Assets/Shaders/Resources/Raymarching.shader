@@ -5,6 +5,7 @@
 		_MainTex ("Texture", 2D) = "white" {}
 		_ColorLight ("Color Light", Color) = (1,1,1,1)
 		_ColorShadow ("Color Shadow", Color) = (1,1,1,1)
+		_ColorBackground ("Color Background", Color) = (0,0,0,1)
 		_Texture ("Texture", 2D) = "white" {}
 		_RadiusSphere ("Radius Sphere", Float) = 4.0
 		_FOV ("FOV", Range(0.1, 2.0)) = 1.0
@@ -34,6 +35,7 @@
 			float _RadiusSphere;
 			float4 _ColorLight;
 			float4 _ColorShadow;
+			float4 _ColorBackground;
 			float _FOV;
 			float _DivisionThinckness;
 			float _DivisionRange;
@@ -88,7 +90,7 @@
 
 			fixed4 frag (v2f i) : SV_Target
 			{
-				fixed4 color = fixed4(0,0,0,1);
+				fixed4 color = _ColorBackground;
 
 				float3 eye = _WorldSpaceCameraPos;
 				float3 front = _CameraForward * _FOV;
@@ -119,8 +121,8 @@
 					if (dist < rayEpsilon) {
 						float4 c = _ColorLight;
 						float ratio = (float)index / (float)rayStepMax;
-						color.rgb = lerp(c, _ColorShadow * ratio, ratio);
-						color.rgb = lerp(color, float3(0,0,0), stepTotal / rayMax);
+						color = lerp(c, _ColorShadow, ratio);
+						color = lerp(color, _ColorBackground, stepTotal / rayMax);
 						break;
 					}
 
