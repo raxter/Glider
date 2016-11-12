@@ -37,6 +37,9 @@ public class TrackBlender : MonoBehaviour
             audiomixer.GetFloat("nextTrackVolume", out nextVolume);
             audiomixer.SetFloat("nextTrackVolume", Mathf.Min(nextVolume + blendingStep * 2, 0f));
 
+            //average of current real cutoff and the preset cutoff of the next track to blend slowly there
+            GetComponent<drop_and_glide_blend>().currentTrackCutOffFreq = ((GetComponent<drop_and_glide_blend>().currentTrackCutOffFreq * 10) + trackDiveCutOffFreq[nextPlayingTrackNum]) / 11;
+
             yield return new WaitForSeconds(0.1f);
         }
         while (nextVolume < 0f);
