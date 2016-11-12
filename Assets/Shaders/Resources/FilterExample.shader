@@ -6,7 +6,7 @@
 	}
 	SubShader
 	{
-		Cull Off ZWrite Off ZTest Always
+		Cull Off ZWrite Off //ZTest Always
 
 		Pass
 		{
@@ -22,7 +22,10 @@
 			fixed4 frag (v2f_img i) : SV_Target
 			{
 				fixed4 col = tex2D(_MainTex, i.uv);
-				col = lerp(tex2D(_RaymarchingTexture, i.uv), col, col.a);
+
+				fixed4 rm = tex2D(_RaymarchingTexture, i.uv).aaaa;
+				//return float4(0,0,col.b, 1);
+				col = lerp(tex2D(_RaymarchingTexture, i.uv), col, 1-rm.a);
 				return col;
 			}
 			ENDCG

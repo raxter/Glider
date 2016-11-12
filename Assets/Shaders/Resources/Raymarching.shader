@@ -6,7 +6,9 @@
 		_ColorLight ("Color Light", Color) = (1,1,1,1)
 		_ColorShadow ("Color Shadow", Color) = (1,1,1,1)
 		_ColorBackground ("Color Background", Color) = (0,0,0,1)
-		_Texture ("Texture", 2D) = "white" {}
+		_Texture("Texture", 2D) = "white" {}
+		_NextTexture("NextTexture", 2D) = "white" {}
+		_TextureLerp ("TextureLerp", Float) = 0
 		_RadiusSphere ("Radius Sphere", Float) = 4.0
 		_FOV ("FOV", Range(0.1, 2.0)) = 1.0
 		_DivisionThinckness ("Division Thinckness", Range(0.0, 1.0)) = 0.1
@@ -15,7 +17,9 @@
 	}
 	SubShader
 	{
-		Cull Off ZWrite Off ZTest Always
+		Cull Off ZWrite Off
+
+		//Blend SrcAlpha OneMinusSrcAlpha
 
 		Pass
 		{
@@ -28,6 +32,8 @@
 			
 			sampler2D _MainTex;
 			sampler2D _Texture;
+			sampler2D _NextTexture;
+			float _TextureLerp;
 			float4 _MainTex_ST;
 			float3 _CameraForward;
 			float3 _CameraUp;
@@ -69,6 +75,11 @@
 				return dot(normalize(a), normalize(b)) * 0.5 + 0.5; 
 			}
 
+			float4 lerpTex2D(float2 uv)
+			{
+				return lerp(tex2D(_Texture, uv), tex2D(_NextTexture, uv), _TextureLerp);
+			}
+
 			// GLKITTY 2016.
 			float noise(float3 p, float speed){
 
@@ -76,8 +87,10 @@
 				float3 np = normalize(p);
 
 				// kind of bi-planar mapping
-				float a = tex2D(_Texture,abs(frac(speed*t/20.+np.xy))).x;      
-				float b = tex2D(_Texture,abs(frac(speed*t/20.+.77+np.yz))).x;
+				//float a = tex2D(_Texture,abs(frac(speed*t/20.+np.xy))).x;      
+				//float b = tex2D(_Texture,abs(frac(speed*t/20.+.77+np.yz))).x;
+				float a = lerpTex2D(abs(frac(speed*t / 20. + np.xy))).x;
+				float b = lerpTex2D(abs(frac(speed*t / 20. + .77 + np.yz))).x;
 
 				a = lerp(a,.5,abs(np.x));
 				b = lerp(b,.5,abs(np.z));
@@ -90,6 +103,9 @@
 
 			fixed4 frag (v2f i) : SV_Target
 			{
+				//float4 background = tex2D(_MainTex, i.uv);
+				//return 1-background;
+
 				fixed4 color = _ColorBackground;
 
 				float3 eye = _WorldSpaceCameraPos;
