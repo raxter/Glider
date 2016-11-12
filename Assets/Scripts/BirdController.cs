@@ -3,57 +3,42 @@
 public class BirdController : MonoBehaviour {
 
     #region Properties
-
+    
     public float mouseVSpeed = 2;
     public float vLimitHigh = -40, vLimitLow = 80;
 
-    public float bottom = -3, top = 2;
+    public float top = 2;
 
     public float baseGravity = 5;
     public float GravityModifier = 0.5f;
-    public float fallMultiplier = 2;
+    public float upwardSpeedModifier = 0.1f;
+    public float maxClimbTime = 0.1f;
+    public float fallBackStrength = 0.1f;
+    public float tipWeight = 40;
+
     public bool invertAxis;
     public bool ignorePitchUpInput = true;
     public bool isFallingBack;
 
     float diveModifier;
-    public float fallBackStrength = 0.1f;
-
+    float climbing;
+    
     float gravityModifier {
         get {
-            if (posY < 0) diveModifier = GravityModifier;
-            return posY > 0 ? diveModifier : GravityModifier;
-        }
-    }
-
-    float posY
-    {
-        get
-        {
-            return 0;// transform.localPosition.y;
+            return isFallingBack ? Mathf.Abs(vLimitHigh) * diveModifier : (Mathf.Abs(pitch) + tipWeight) * GravityModifier;
         }
     }
 
     public float ySpeed {
         get {
-            return -pitch * 0.1f;
-        }
-    }
-
-    //float cameraYSpeed {
-    //    get {
-    //        return pitch > 0 ? ySpeed * fallMultiplier : ySpeed;
-    //    }
-    //}
-
-    float clampedYSpeed {
-        get {
-            return posY < bottom ? Mathf.Max(0, ySpeed) : ySpeed;
+            return pitch > 0 ? -pitch * 0.1f : -pitch * 0.1f * upwardSpeedModifier;
         }
     }
 
     float gravity;
     public float pitch { get; set; }
+
+    float highestPoint;
 
     #endregion
 
@@ -65,70 +50,53 @@ public class BirdController : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-	void Update () {
+    void Update() {
         Rotate();
-        Move();
-        MoveCamera();
 
         if (Input.GetMouseButtonDown(0))
             Cursor.lockState = CursorLockMode.Locked;
     }
 
-
-    float noUpTimeValue = 0;
     void Rotate() {
-        float value = mouseVSpeed * Input.GetAxis("Mouse Y")/60;// * Time.deltaTime;
+        float value = mouseVSpeed * Input.GetAxis("Mouse Y") / 60;
+
         if (ignorePitchUpInput)
-        {
-            if (value <= 0)
-            {
-                noUpTimeValue -= value;
-                value = 0;
-            }
-            else
-            {
-                noUpTimeValue -= value;
-                if (noUpTimeValue < 0)
-                    noUpTimeValue = 0;
-            }
+            value = invertAxis ? Mathf.Max(value, 0) : Mathf.Min(value, 0);
 
-            noUpTimeValue = Mathf.Lerp(noUpTimeValue, 0, Time.deltaTime * 1);
-
-            if (noUpTimeValue > 0.01f)
-                value = 0;
-        }
         PreventFlyingUp(ref value);
 
         pitch = invertAxis ? pitch - value : pitch + value;
 
+        if (pitch < 0 && highestPoint > transform.position.y + top)
+            highestPoint = transform.position.y + top;
+
         ApplyGravity();
 
         pitch = Mathf.Clamp(pitch, vLimitHigh, vLimitLow);
-        //transform.localEulerAngles = Vector3.right * pitch;
-    }
-
-    void Move() {
-        //Debug.Log(clampedYSpeed);
-        //transform.Translate(Vector3.up * clampedYSpeed * Time.deltaTime, Space.World);
-    }
-
-    void MoveCamera() {
-        //transform.parent.Translate(Vector3.up * cameraYSpeed * Time.deltaTime, Space.World);
     }
 
     void ApplyGravity() {
-        gravity = baseGravity + Mathf.Abs(posY * 20) * gravityModifier;
+        gravity = baseGravity + gravityModifier;
         pitch += gravity * Time.deltaTime;
     }
-
+    
     void PreventFlyingUp(ref float value) {
-        if (posY > top) {
+        if (pitch < 0 && transform.position.y > highestPoint)
+            climbing += Time.deltaTime;
+
+        if (transform.position.y < highestPoint && isFallingBack) {
+            climbing = 0;
+            isFallingBack = false;
+        }
+
+        if (climbing >= maxClimbTime) {
             if (!isFallingBack) {
-                diveModifier = -pitch * fallBackStrength;
+                diveModifier = Mathf.Abs(pitch * fallBackStrength);
                 isFallingBack = true;
             }
-            value = Mathf.Max(value, 0);
-        } else isFallingBack = false;
+
+            value = invertAxis ? Mathf.Min(0, value) : Mathf.Max(value, 0);
+        }
     }
 
     #endregion

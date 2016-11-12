@@ -61,9 +61,9 @@ public class GamePlayController : MonoBehaviour
 
             dropAndGlideBlender.GlideToDropBlend = diveAmount;
         }
+
         skyboxController.Depth = -birdController.transform.position.y;
-
-
+        
         oldDiveAmount = diveAmount;
     }
 

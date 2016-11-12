@@ -8,10 +8,11 @@
 
 	sampler2D _MainTex;
 	float _BlurAmount;
+	float2 _Offset;
 
 	float2 itr(int n, v2f_img i) {
 		float ba = 1 - n * _BlurAmount / 20;
-		return (i.uv*ba) + (1 - ba) / 2;
+		return (i.uv*ba) + ((1 - ba) / 2) * (1-_Offset);
 	}
 
 	half4 frag(v2f_img i) : SV_Target{
