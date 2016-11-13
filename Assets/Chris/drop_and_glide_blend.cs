@@ -11,6 +11,7 @@ public class drop_and_glide_blend : MonoBehaviour
     public float currentTrackCutOffFreq = 3000f;
 
     public AnimationCurve swooshSoundVolume;
+    public float swooshAngleDelta = 10;
 
     public Transform trackBlender;
 
@@ -45,7 +46,7 @@ public class drop_and_glide_blend : MonoBehaviour
 
         float currentSpeed = trackBlender.GetComponent<TrackBlender>().currentFlightSpeed;
         float speedDelta = oldFlightSpeed - currentSpeed;
-        if (speedDelta > 0.5f && currentSpeed < 10f)
+        if (speedDelta > swooshAngleDelta && currentSpeed < 10f)
         {
             if (!suddenSwoosh.GetComponent<AudioSource>().isPlaying)
             {
@@ -57,13 +58,5 @@ public class drop_and_glide_blend : MonoBehaviour
         }
 
         oldFlightSpeed = currentSpeed;
-    }
-
-
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

@@ -6,6 +6,7 @@ public class BirdController : MonoBehaviour {
     
     public float mouseVSpeed = 2;
     public float vLimitHigh = -40, vLimitLow = 80;
+    float trueVLimit;
 
     public float top = 2;
 
@@ -55,9 +56,16 @@ public class BirdController : MonoBehaviour {
 
         if (Input.GetMouseButtonDown(0))
             Cursor.lockState = CursorLockMode.Locked;
+        if (Input.GetMouseButtonDown(2))
+            invertAxis ^= true;
     }
 
     void Rotate() {
+        if (pitch > -trueVLimit) 
+            trueVLimit = Mathf.Max(vLimitHigh, -Mathf.Abs(pitch));
+        else if (pitch < 0) 
+            trueVLimit = pitch;
+
         float value = mouseVSpeed * Input.GetAxis("Mouse Y") / 60;
 
         if (ignorePitchUpInput)
@@ -72,7 +80,7 @@ public class BirdController : MonoBehaviour {
 
         ApplyGravity();
 
-        pitch = Mathf.Clamp(pitch, vLimitHigh, vLimitLow);
+        pitch = Mathf.Clamp(pitch, trueVLimit, vLimitLow);
     }
 
     void ApplyGravity() {
