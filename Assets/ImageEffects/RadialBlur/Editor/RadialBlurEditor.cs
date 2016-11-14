@@ -4,6 +4,7 @@
 [CustomEditor(typeof(RadialBlur))]
 public class RadialBlurEditor : Editor {
     SerializedProperty _blurAmount, _offsetX, _offsetY;
+    bool showOffset;
 
     void OnEnable() {
         _blurAmount = serializedObject.FindProperty("_blurAmount");
@@ -15,12 +16,13 @@ public class RadialBlurEditor : Editor {
         serializedObject.Update();
 
         EditorGUILayout.PropertyField(_blurAmount);
-        EditorGUILayout.LabelField("Offset");
-        EditorGUI.indentLevel++;
-        EditorGUILayout.PropertyField(_offsetX);
-        EditorGUILayout.PropertyField(_offsetY);
-        EditorGUI.indentLevel--;
-
+        showOffset = EditorGUILayout.Foldout(showOffset, "Offset");
+        if (showOffset) {
+            EditorGUI.indentLevel++;
+            EditorGUILayout.PropertyField(_offsetX);
+            EditorGUILayout.PropertyField(_offsetY);
+            EditorGUI.indentLevel--;
+        }
         serializedObject.ApplyModifiedProperties();
     }
 }

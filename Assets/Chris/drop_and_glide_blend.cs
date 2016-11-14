@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.Audio;
 
 public class drop_and_glide_blend : MonoBehaviour
@@ -11,11 +10,13 @@ public class drop_and_glide_blend : MonoBehaviour
     public float currentTrackCutOffFreq = 3000f;
 
     public AnimationCurve swooshSoundVolume;
-    public float swooshAngleDelta = 10;
+    public float swooshSpeed = 25;
+    public float swooshAngleDelta = 5;
 
     public Transform trackBlender;
 
     private float oldFlightSpeed = 0;
+    private bool canSwoosh;
 
     public float GlideToDropBlend
     {
@@ -24,8 +25,7 @@ public class drop_and_glide_blend : MonoBehaviour
             adjustGlideAndDropBlend(value);
         }
     }
-
-    // Use this for initialization
+    
     void Start()
     {
         currentTrackCutOffFreq = GetComponent<TrackBlender>().trackDiveCutOffFreq[0];
@@ -45,8 +45,9 @@ public class drop_and_glide_blend : MonoBehaviour
         trackBlender.GetComponent<TrackBlender>().currentFlightSpeed = newValue * 30f;
 
         float currentSpeed = trackBlender.GetComponent<TrackBlender>().currentFlightSpeed;
+        if (currentSpeed > swooshSpeed) canSwoosh = true;
         float speedDelta = oldFlightSpeed - currentSpeed;
-        if (speedDelta > swooshAngleDelta && currentSpeed < 10f)
+        if (canSwoosh && speedDelta > swooshAngleDelta && currentSpeed < 10f)
         {
             if (!suddenSwoosh.GetComponent<AudioSource>().isPlaying)
             {

@@ -2,7 +2,7 @@
 
 [ExecuteInEditMode]
 [RequireComponent(typeof(Camera))]
-[AddComponentMenu("Image Effects/RadialBlurGrr")]
+[AddComponentMenu("Image Effects/RadialBlur (Grr)")]
 public class RadialBlur : MonoBehaviour {
     #region Public Properties
 
@@ -38,7 +38,7 @@ public class RadialBlur : MonoBehaviour {
     #endregion
 
     #region MonoBehaviour Functions
-
+    
     void OnRenderImage(RenderTexture source, RenderTexture destination) {
         if (_material == null) {
             _material = new Material(_shader);
