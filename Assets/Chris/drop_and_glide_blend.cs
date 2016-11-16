@@ -55,7 +55,7 @@ public class drop_and_glide_blend : MonoBehaviour
                 suddenSwoosh.GetComponent<AudioSource>().volume = Mathf.Lerp(0.2f, 1, Mathf.Clamp01((speedDelta - 0.5f) / 2));
                 suddenSwoosh.GetComponent<AudioSource>().Play();
             }
-
+            canSwoosh = false;
         }
 
         oldFlightSpeed = currentSpeed;
