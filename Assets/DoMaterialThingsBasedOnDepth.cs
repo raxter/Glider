@@ -63,7 +63,7 @@ public class DoMaterialThingsBasedOnDepth : MonoBehaviour
     Color currentRMShadow;
 
     float depthOffset;
-
+    public float startDepth = 100;
     void Start()
     {
         depthOffset = Random.Range(100, 10000);
@@ -72,9 +72,9 @@ public class DoMaterialThingsBasedOnDepth : MonoBehaviour
         targetRMLight = new Color(0, 0, 0, 0);
         targetRMShadow = new Color(0, 0, 0, 0);
 
-        lastBackgroundChange = depthOffset + 1;
-        lastLightChange = depthOffset + 1;
-        lastShadowChange = depthOffset + 1;
+        lastBackgroundChange = depthOffset + startDepth;
+        lastLightChange = depthOffset + startDepth;
+        lastShadowChange = depthOffset + startDepth;
 
         PickNewTexture(depthOffset);
     }

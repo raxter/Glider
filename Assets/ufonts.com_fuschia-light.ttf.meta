@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: fbc48bd0ce2fd394bb0ce4ae880e7a2f
+timeCreated: 1480191794
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Fuschia Light
+  fontNames:
+  - Fuschia Light
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
