@@ -1,0 +1,27 @@
+fileFormatVersion: 2
+guid: bc3610718882b234e8094eb32da852ac
+timeCreated: 1480191794
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Cicle
+  fontNames:
+  - Cicle
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 7068639498194944d8b44e016169747a, type: 3}
+  - {fileID: 12800000, guid: 1b3ea6071cce4e2499c3b80347062083, type: 3}
+  - {fileID: 12800000, guid: 720aa078e107e3a408aec9f6136deb42, type: 3}
+  - {fileID: 12800000, guid: a230043c666bcfd4eaa680fd055f0b2b, type: 3}
+  - {fileID: 12800000, guid: a5cfcf4c84493c64fb3f25fd693cdb98, type: 3}
+  - {fileID: 12800000, guid: 8d051e7e0da7f744ca7d348e20827c45, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -2,7 +2,7 @@ using UnityEngine;
 
 [ExecuteInEditMode]
 [RequireComponent(typeof(Camera))]
-[AddComponentMenu("Image Effects/VignetteGrr")]
+[AddComponentMenu("Image Effects/Vignette (Grr)")]
 public class Vignette : MonoBehaviour {
     #region Public Properties
     
@@ -16,7 +16,7 @@ public class Vignette : MonoBehaviour {
         set { _falloff = value; }
     }
     
-    [SerializeField, Tooltip("The Color of the Vignetting effect.")]
+    [SerializeField, ColorUsage(false), Tooltip("The Color of the Vignetting effect.")]
     Color _color = Color.black;
     /// <summary>
     /// The Color of the Vignetting effect.

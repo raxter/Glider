@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 0a4c8f40d41cfa943ae5a026f90edab2
+timeCreated: 1480191608
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Fuschia Medium
+  fontNames:
+  - Fuschia Medium
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

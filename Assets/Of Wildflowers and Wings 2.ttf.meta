@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 37b2ba9e50085734dae86a8510b510c6
+timeCreated: 1480191307
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Of Wildflowers and Wings
+  fontNames:
+  - Of Wildflowers and Wings
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
