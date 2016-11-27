@@ -11,13 +11,26 @@
 		Pass
 		{
 			CGPROGRAM
-			#pragma vertex vert_img
+			#pragma vertex vert
 			#pragma fragment frag
 			
 			#include "UnityCG.cginc"
 			
 			sampler2D _MainTex;
+			float4 _MainTex_TexelSize;
 			sampler2D _RaymarchingTexture;
+
+			v2f_img vert(appdata_img v)
+			{
+				v2f_img o;
+				o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+				o.uv = v.texcoord;
+#if UNITY_UV_STARTS_AT_TOP
+				if (_MainTex_TexelSize.y < 0)
+					o.uv.y = 1 - o.uv.y;
+#endif
+				return o;
+			}
 
 			fixed4 frag (v2f_img i) : SV_Target
 			{

@@ -12,6 +12,20 @@ Shader "Hidden/VignetteGrr" {
 	float _Strength;
 	half4 _Color;
 
+	float4 _MainTex_TexelSize;
+
+	v2f_img vert(appdata_img v)
+	{
+		v2f_img o;
+		o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+		o.uv = v.texcoord;
+#if UNITY_UV_STARTS_AT_TOP
+		if (_MainTex_TexelSize.y < 0)
+			o.uv.y = 1 - o.uv.y;
+#endif
+		return o;
+	}
+
     half4 frag(v2f_img i) : SV_Target {
         float2 coord = (i.uv - 0.5) * _Aspect * _Strength;
         float rf = sqrt(dot(coord, coord)) * _Falloff;
@@ -28,7 +42,7 @@ Shader "Hidden/VignetteGrr" {
         Pass {
             ZTest Always Cull Off ZWrite Off
             CGPROGRAM
-            #pragma vertex vert_img
+            #pragma vertex vert
             #pragma fragment frag
             ENDCG
         }

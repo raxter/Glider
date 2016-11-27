@@ -47,6 +47,9 @@
 			float _DivisionRange;
 			float _InputRatio;
 
+
+			float4 _MainTex_TexelSize;
+
 			#define rayEpsilon 0.0001
 			#define rayMax 100.0
 			#define rayStepMax 16
@@ -63,6 +66,11 @@
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.uv = TRANSFORM_TEX(v.texcoord, _MainTex);
 				o.viewDir = normalize(WorldSpaceViewDir(v.vertex));
+
+#if UNITY_UV_STARTS_AT_TOP
+				if (_MainTex_TexelSize.y < 0)
+					o.uv.y = 1 - o.uv.y;
+#endif
 				return o;
 			}
 
@@ -118,7 +126,7 @@
 				float radiusSphere = 0.5;
 
 				float2 uv = i.uv.xy;
-				uv.y = 1.0 - uv.y;
+				//uv.y = 1.0 - uv.y;
 				uv = uv * 2.0 - 1.0;
 				uv.x *= _ScreenParams.x / _ScreenParams.y;
 				float3 ray = normalize(front + right * uv.x + up * uv.y);
