@@ -62,13 +62,34 @@ public class BirdController : MonoBehaviour {
             invertAxis ^= true;
     }
 
+    public float timeSinceLastKeyPress = 0;
+    public float keyboardMoveBaseVal = 1;
+    public float keyboardMoveBasefalloffRate = 1;
+    [Header("Debug")]
+    public float keyboardSwipeVel = 0;
+    
     void Rotate() {
         if (pitch > -trueVLimit) 
             trueVLimit = Mathf.Max(vLimitHigh, -Mathf.Abs(pitch));
         else if (pitch < 0) 
             trueVLimit = pitch;
 
-        float value = pitch > 0 ? mouseVSpeed * Input.GetAxis("Mouse Y") / 60 : mouseVSpeed * Input.GetAxis("Mouse Y") / 80;
+        float axis = 0;
+
+        timeSinceLastKeyPress += Time.deltaTime;
+        if (Input.anyKeyDown)
+        {
+            keyboardSwipeVel -= (keyboardMoveBaseVal/timeSinceLastKeyPress)*Time.deltaTime;
+            timeSinceLastKeyPress = 0;
+        }
+        
+        axis += keyboardSwipeVel;
+        keyboardSwipeVel = Mathf.Lerp(keyboardSwipeVel, 0, Time.deltaTime * keyboardMoveBasefalloffRate);
+        
+        axis += Input.GetAxis("Mouse Y");
+
+        
+        float value = pitch > 0 ? mouseVSpeed * axis / 60 : mouseVSpeed * axis / 80;
 
         if (ignorePitchUpInput)
             value = invertAxis ? Mathf.Max(value, 0) : Mathf.Min(value, 0);
