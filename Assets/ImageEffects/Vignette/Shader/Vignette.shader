@@ -20,8 +20,8 @@ Shader "Hidden/VignetteGrr" {
 		o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
 		o.uv = v.texcoord;
 #if UNITY_UV_STARTS_AT_TOP
-		if (_MainTex_TexelSize.y < 0)
-			o.uv.y = 1 - o.uv.y;
+//		if (_MainTex_TexelSize.y < 0)
+//			o.uv.y = 1 - o.uv.y;
 #endif
 		return o;
 	}

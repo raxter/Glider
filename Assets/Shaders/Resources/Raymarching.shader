@@ -126,7 +126,7 @@
 				float radiusSphere = 0.5;
 
 				float2 uv = i.uv.xy;
-				//uv.y = 1.0 - uv.y;
+				uv.y = 1.0 - uv.y;
 				uv = uv * 2.0 - 1.0;
 				uv.x *= _ScreenParams.x / _ScreenParams.y;
 				float3 ray = normalize(front + right * uv.x + up * uv.y);

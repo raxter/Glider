@@ -34,6 +34,7 @@
 
 			fixed4 frag (v2f_img i) : SV_Target
 			{
+				i.uv.y = 1- i.uv.y;
 				fixed4 col = tex2D(_MainTex, i.uv);
 
 				fixed4 rm = tex2D(_RaymarchingTexture, i.uv).aaaa;
